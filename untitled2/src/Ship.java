@@ -1,62 +1,52 @@
-public class Pole {
+import java.util.Scanner;
 
-    private static final String[][] pole = new String[10][10];
+public class Ship {
 
-    public static void addShip(int a, int number) {
-        String[] slovar = new String[]{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j"};
-        pole[number][a] = "1";
-        printPole();
+    private static int n;
 
+    public static int getN() {
+        return n;
     }
 
-    public static void printPole() {
-        for (int i = 0; i < pole.length; i++) {
-            for (int j = 0; j < pole[i].length; j++) {
-                if (pole[i][j] == null) {
-                    System.out.print(" 0");
-                } else {
-                    System.out.print(" " + pole[i][j]);
+    public static void setN(int n) {
+        Ship.n = n;
+    }
+
+    Ship(int n) {
+        Ship.n = n;
+        addShipOnPole();
+    }
+
+    private static void addShipOnPole() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Вводите координаты, куда хотите поставить корабль, состоящий из " + n + " клеток");
+        String[] slovar = new String[]{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j"};
+
+        int dopSymbol;
+        int dopNumber;
+        boolean horizont = false;
+        boolean vertical = false;
+        for (int i = 0; i < n; i++) {
+            String str = sc.next();
+            String symbol = String.valueOf(str.charAt(0));
+
+            boolean logic = false;
+            int symbolToSlovar = -1;
+            while (!logic){
+                symbolToSlovar++;
+                if (slovar[symbolToSlovar].equals(symbol)){
+                    logic = true;
                 }
             }
-            System.out.println();
-        }
-    }
 
-    public static boolean isRoundShip(int a, int number) {           //number индекс строки(массива) | a индекс элемента в строке 
-        boolean logic = false;
-        if (number == 0 && a == 0) {
-            if (pole[0][1] == null && pole[1][0] == null && pole[1][1] == null) {
-                logic = true;
-            }
-        } else if (number == 9 && a == 0) {
-            if (pole[8][0] == null && pole[8][1] == null && pole[9][1] == null) {
-                logic = true;
-            }
-        } else if (number == 0 && a == 9) {
-            if (pole[0][8] == null && pole[1][8] == null && pole[1][9] == null) {
-                logic = true;
-            }
-        } else if (number == 9 && a == 9) {
-            if (pole[9][8] == null && pole[8][8] == null && pole[8][9] == null) {
-                logic = true;
-            }
-        } else if (number == 0) {
-            if (pole[0][a - 1] == null && pole[0][a + 1] == null && pole[1][a - 1] == null && pole[1][a] == null && pole[1][a + 1] == null) {
-                logic = true;
-            }
-        } else if (a == 0) {
-            if (pole[number + 1][0] == null && pole[number - 1][0] == null && pole[number + 1][1] == null && pole[number][1] == null && pole[number - 1][1] == null) {
-                logic = true;
-            }
-        } else if (number == 9) {
-            if (pole[9][a - 1] == null && pole[9][a + 1] == null && pole[8][a - 1] == null && pole[8][a] == null && pole[8][a + 1] == null) {
-                logic = true;
-            }
-        } else if (a == 9) {
-            if (pole[number + 1][9] == null && pole[number - 1] == null && pole[number + 1][8] == null) {
-                logic = true;
+            int number = Integer.parseInt(String.valueOf(str.charAt(1))) - 1;
+            if (i == 0) {
+                Pole.addShip(symbolToSlovar,  number);
+                dopSymbol = symbolToSlovar;
+                dopNumber = number;
+            }else if (number == ) {
+
             }
         }
-        return logic;
     }
 }
